@@ -42,6 +42,7 @@ var loader = {
 				} 
 				else {
 					//show some fail state
+					grid.innerHTML = 'Service failed to load. Try again later.'
 				}
 			}
 		}
