@@ -42,7 +42,8 @@ var loader = {
 				} 
 				else {
 					//show some fail state
-					grid.innerHTML = 'Service failed to load. Try again later.'
+					grid.innerHTML = 'Service failed to load. Try again later.';
+					window.clearInterval(interval);
 				}
 			}
 		}
@@ -79,8 +80,8 @@ var app = {
 				"<p class='bold'>" + Number(Number(i)+1) + ".</p>" + 
 				"<p>track name : </p>" + "<p class='bold'>" + arr[i].track + "</p>" + 
 				"<p>artist name : </p>" + "<p class='bold'>" + arr[i].artist + "</p>" +
-				"<p>amazon prices : </p>" + "<p class='bold'>$" + arr[i].amazonPrice + "</p>" +
 				"<p>itunes prices : </p>" +  "<p class='bold'>" + arr[i].itunesPrice + "</p>" +
+				"<p>amazon prices : </p>" + "<p class='bold'>$" + arr[i].amazonPrice + "</p>" +
 				"</div>";	
 
 			grid.innerHTML += theGrid;
@@ -134,6 +135,10 @@ var app = {
 	},
 
 	filterByArtist : function(event) {
+		while (grid.firstChild) {
+			grid.removeChild(grid.firstChild);
+		}
+
 		if (filter_box.value.length < 1 || filter_box.value === 'ENTER AN ARTIST NAME'){
 			filter_box.value = 'ENTER AN ARTIST NAME';
 			app.setGridArray(gridArray);
@@ -142,10 +147,6 @@ var app = {
 
 		var tester = filter_box.value.toLowerCase();
 
-		while (grid.firstChild) {
-			grid.removeChild(grid.firstChild);
-		}
-
 		for (var i = 0; i < gridArray.length; i++){
 			var checker = gridArray[i].artist.toLowerCase();
 			if (tester === checker){
@@ -153,8 +154,8 @@ var app = {
 					"<p class='bold'>" + Number(Number(i)+1) + ".</p>" + 
 					"<p>track name : </p>" + "<p class='bold'>" + gridArray[i].track + "</p>" + 
 					"<p>artist name : </p>" + "<p class='bold'>" + gridArray[i].artist + "</p>" +
-					"<p>amazon prices : </p>" + "<p class='bold'>$" + gridArray[i].amazonPrice + "</p>" +
 					"<p>itunes prices : </p>" +  "<p class='bold'>" + gridArray[i].itunesPrice + "</p>" +
+					"<p>amazon prices : </p>" + "<p class='bold'>$" + gridArray[i].amazonPrice + "</p>" +
 					"</div>";	
 
 				grid.innerHTML += theGrid;
